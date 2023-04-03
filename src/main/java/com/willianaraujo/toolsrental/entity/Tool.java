@@ -5,8 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.time.LocalDateTime;
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
@@ -14,27 +13,33 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Rentals {
+public class Tool {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "user_id", nullable = false)
-    private Integer userId;
+    @Column(nullable = false)
+    private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
-    @JoinColumn(name = "tool_id", nullable = false)
-    private Integer toolId;
+    @Column(nullable = false)
+    private String description;
 
-    @Column(name = "rental_start_date", nullable = false)
-    private LocalDateTime rentalStartDate;
+    @Column(name = "rental_rate_per_day", nullable = false)
+    private BigDecimal rentalRatePerDay;
 
-    @Column(name = "rental_end_date", nullable = false)
-    private LocalDateTime rentalEndDate;
+    @Column(name = "photo_file_path")
+    private String photoFilePath;
 
-    private Boolean returned;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "tool_group_id", nullable = false)
+    private Integer toolGroupId;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "owner_address_id", nullable = false)
+    private Integer ownerAddressId;
+
+    private Boolean available;
 
     @Column(name = "created_at", nullable = false, insertable = true)
     @Temporal(TemporalType.TIMESTAMP)
@@ -51,7 +56,7 @@ public class Rentals {
     }
 
     @PreUpdate
-    protected void onUpdate(){
+    protected void onUpdated(){
         updatedAt = new Date();
     }
 

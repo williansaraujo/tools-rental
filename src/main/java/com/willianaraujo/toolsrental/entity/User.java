@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
 
 @Entity
@@ -13,13 +12,20 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ToolGroups {
+public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column (nullable = false)
     private String name;
+
+    @Column (nullable = false, unique = true)
+    private String email;
+
+    @Column (nullable = false)
+    private Integer phone;
 
     private Boolean available;
 
@@ -27,12 +33,12 @@ public class ToolGroups {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column(name = "updated_at", insertable = true, nullable = false)
+    @Column(name = "updated_at", updatable = true, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
     @PrePersist
-    protected void onCreated(){
+    protected void onCreate() {
         createdAt = new Date();
         updatedAt = createdAt;
     }

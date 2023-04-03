@@ -5,29 +5,20 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 import java.util.Date;
-
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Users {
-
+public class ToolGroup {
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String name;
-
-    @Column (nullable = false, unique = true)
-    private String email;
-
-    @Column (nullable = false)
-    private Integer phone;
 
     private Boolean available;
 
@@ -35,12 +26,12 @@ public class Users {
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column(name = "updated_at", updatable = true, nullable = false)
+    @Column(name = "updated_at", insertable = true, nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
     @PrePersist
-    protected void onCreate() {
+    protected void onCreated(){
         createdAt = new Date();
         updatedAt = createdAt;
     }
