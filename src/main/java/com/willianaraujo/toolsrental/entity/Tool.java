@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "tools")
 public class Tool {
 
     @Id
@@ -32,20 +33,20 @@ public class Tool {
     private String photoFilePath;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "tool_group_id", nullable = false)
-    private Integer toolGroupId;
+    @JoinColumn(name = "tool_id", nullable = false)
+    private ToolGroup toolGroupId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.REMOVE, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "owner_address_id", nullable = false)
-    private Integer ownerAddressId;
+    private Address ownerAddressId;
 
     private Boolean available;
 
-    @Column(name = "created_at", nullable = false, insertable = true)
+    @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column(name = "updated_at", nullable = false, insertable = true)
+    @Column(name = "updated_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

@@ -12,6 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -25,11 +26,11 @@ public class User {
     private String email;
 
     @Column (nullable = false)
-    private Integer phone;
+    private String phone;
 
     private Boolean available;
 
-    @Column(name = "created_at", insertable = true, nullable = false)
+    @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 

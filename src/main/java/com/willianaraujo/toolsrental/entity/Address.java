@@ -12,6 +12,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "addresses")
 public class Address {
 
     @Id
@@ -19,7 +20,7 @@ public class Address {
     private Long id;
 
     @Column(nullable = false)
-    private Integer street;
+    private String street;
 
     @Column (nullable = false)
     private Integer number;
@@ -43,15 +44,15 @@ public class Address {
 
     @ManyToOne (fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
     @JoinColumn(name = "user_id", nullable = false)
-    private Integer userId;
+    private User userId;
 
     private Boolean available;
 
-    @Column(name="created_id", insertable = true, nullable = false)
+    @Column(name="created_id", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column(name="updated_at", insertable = true, nullable = false)
+    @Column(name="updated_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 

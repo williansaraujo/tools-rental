@@ -13,6 +13,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "rentals")
 public class Rental {
 
     @Id
@@ -21,11 +22,11 @@ public class Rental {
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "user_id", nullable = false)
-    private Integer userId;
+    private User userId;
 
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "tool_id", nullable = false)
-    private Integer toolId;
+    private Tool toolId;
 
     @Column(name = "rental_start_date", nullable = false)
     private LocalDateTime rentalStartDate;
@@ -35,11 +36,11 @@ public class Rental {
 
     private Boolean returned;
 
-    @Column(name = "created_at", nullable = false, insertable = true)
+    @Column(name = "created_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
 
-    @Column(name = "updated_at", nullable = false, insertable = true)
+    @Column(name = "updated_at", nullable = false)
     @Temporal(TemporalType.TIMESTAMP)
     private Date updatedAt;
 
