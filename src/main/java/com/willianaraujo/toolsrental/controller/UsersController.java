@@ -24,7 +24,7 @@ public class UsersController {
     public MessageResponseDTO create(@RequestBody User user){
         User saveUser = userRepository.save(user);
         return MessageResponseDTO.builder()
-                .message("Usuário "+ saveUser.getId() + " criado com sucesso" )
+                .message("Usuário "+ saveUser.getId() + " criado com sucesso." )
                 .build();
     }
 }
