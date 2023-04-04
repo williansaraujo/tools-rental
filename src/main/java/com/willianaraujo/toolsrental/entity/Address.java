@@ -42,7 +42,7 @@ public class Address {
     @Column (nullable = false)
     private String country;
 
-    @ManyToOne (fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE})
+    @ManyToOne (fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE})
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;
 
