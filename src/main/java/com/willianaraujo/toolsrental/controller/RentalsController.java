@@ -2,7 +2,7 @@ package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.entity.Rental;
-import com.willianaraujo.toolsrental.repository.RentalRepository;
+import com.willianaraujo.toolsrental.service.RentalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,18 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/v1/rentals")
 public class RentalsController {
 
-    private RentalRepository rentalRepository;
+    private RentalService rentalService;
 
     @Autowired
-    public RentalsController(RentalRepository rentalRepository) {
-        this.rentalRepository = rentalRepository;
+    public RentalsController(RentalService rentalService) {
+        this.rentalService = rentalService;
     }
 
     @PostMapping
     public MessageResponseDTO create(@RequestBody Rental rental){
-        Rental saveRental = rentalRepository.save(rental);
-        return MessageResponseDTO.builder()
-                .message("Aluguel " + saveRental.getId() + " realizado com sucesso.")
-                .build();
+        return rentalService.create(rental);
     }
 }

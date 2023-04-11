@@ -2,7 +2,7 @@ package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.entity.User;
-import com.willianaraujo.toolsrental.repository.UserRepository;
+import com.willianaraujo.toolsrental.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,18 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/users")
 public class UsersController {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     @Autowired
-    public UsersController(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public UsersController(UserService userService) {
+        this.userService = userService;
     }
 
     @PostMapping
     public MessageResponseDTO create(@RequestBody User user){
-        User saveUser = userRepository.save(user);
-        return MessageResponseDTO.builder()
-                .message("Usuário "+ saveUser.getId() + " criado com sucesso." )
-                .build();
+        return userService.create(user);
     }
 }
