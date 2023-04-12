@@ -1,8 +1,9 @@
 package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
-import com.willianaraujo.toolsrental.entity.User;
+import com.willianaraujo.toolsrental.dto.UserDTO;
 import com.willianaraujo.toolsrental.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class UsersController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody User user){
-        return userService.create(user);
+    public MessageResponseDTO create(@RequestBody @Valid UserDTO userDTO){
+        return userService.create(userDTO);
     }
 }
