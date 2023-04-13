@@ -1,8 +1,9 @@
 package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
-import com.willianaraujo.toolsrental.entity.Rental;
+import com.willianaraujo.toolsrental.dto.RentalDTO;
 import com.willianaraujo.toolsrental.service.RentalService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public class RentalsController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Rental rental){
-        return rentalService.create(rental);
+    public MessageResponseDTO create(@RequestBody @Valid RentalDTO rentalDTO){
+        return rentalService.create(rentalDTO);
     }
 }

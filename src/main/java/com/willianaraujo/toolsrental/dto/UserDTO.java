@@ -1,6 +1,7 @@
 package com.willianaraujo.toolsrental.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +26,7 @@ public class UserDTO {
         @Size(max = 200)
         private String email;
 
-        @Size(max = 11)
+        @Size(max = 13)
         private String phone;
 
         private Boolean available;

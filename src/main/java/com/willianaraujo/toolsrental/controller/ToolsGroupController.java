@@ -1,8 +1,10 @@
 package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
+import com.willianaraujo.toolsrental.dto.ToolGroupDTO;
 import com.willianaraujo.toolsrental.entity.ToolGroup;
 import com.willianaraujo.toolsrental.service.ToolGroupService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +23,8 @@ public class ToolsGroupController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody ToolGroup toolGroup){
-        return toolGroupService.create(toolGroup);
+    public MessageResponseDTO create(@RequestBody @Valid ToolGroupDTO toolGroupDTO){
+        return toolGroupService.create(toolGroupDTO);
 
     }
 }

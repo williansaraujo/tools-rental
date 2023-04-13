@@ -1,8 +1,9 @@
 package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
-import com.willianaraujo.toolsrental.entity.Tool;
+import com.willianaraujo.toolsrental.dto.ToolDTO;
 import com.willianaraujo.toolsrental.service.ToolService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class ToolsController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Tool tool){
-        return toolService.create(tool);
+    public MessageResponseDTO create(@RequestBody @Valid ToolDTO toolDTO){
+        return toolService.create(toolDTO);
     }
 }

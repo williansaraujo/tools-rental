@@ -1,8 +1,10 @@
 package com.willianaraujo.toolsrental.controller;
 
+import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.entity.Address;
 import com.willianaraujo.toolsrental.service.AddressService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,8 +23,8 @@ public class AddressesController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody Address address){
-        return addressService.create(address);
+    public MessageResponseDTO create(@RequestBody @Valid AddressDTO addressDTO){
+        return addressService.create(addressDTO);
     }
 
 }
