@@ -26,10 +26,10 @@ public class RentalDTO {
     private ToolDTO toolId;
 
     @NotNull
-    private LocalDateTime rentalStartDate;
+    private Date rentalStartDate;
 
     @NotNull
-    private LocalDateTime rentalEndDate;
+    private Date rentalEndDate;
 
     private Boolean returned;
 

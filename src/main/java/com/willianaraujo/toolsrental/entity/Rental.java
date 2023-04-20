@@ -29,10 +29,10 @@ public class Rental {
     private Tool toolId;
 
     @Column(name = "rental_start_date", nullable = false)
-    private LocalDateTime rentalStartDate;
+    private Date rentalStartDate;
 
     @Column(name = "rental_end_date", nullable = false)
-    private LocalDateTime rentalEndDate;
+    private Date rentalEndDate;
 
     private Boolean returned;
 

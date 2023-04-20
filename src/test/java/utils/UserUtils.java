@@ -7,6 +7,8 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.github.javafaker.Faker;
 import com.willianaraujo.toolsrental.dto.UserDTO;
 import com.willianaraujo.toolsrental.entity.User;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 
 import java.util.Calendar;
 
@@ -27,7 +29,7 @@ public class UserUtils {
                 .build();
     }
 
-    public static User createFakeUser() {
+    public static @Valid @NotNull User createFakeUser() {
         return User.builder()
                 .id(faker.number().randomNumber())
                 .name(faker.name().fullName())
