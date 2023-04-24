@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class AddressService {
 
@@ -22,14 +24,18 @@ public class AddressService {
     }
 
     @PostMapping
-    public MessageResponseDTO create(AddressDTO addressDTO){
+    public MessageResponseDTO create(AddressDTO addressDTO) {
 
         Address addressToSave = addressMapper.toModel(addressDTO);
 
         Address saveAddress = addressRepository.save(addressToSave);
         return MessageResponseDTO.builder()
-                .message("Endereço "+ saveAddress.getId() + " criado com sucesso" )
+                .message("Endereço " + saveAddress.getId() + " criado com sucesso")
                 .build();
     }
 
+    public AddressDTO findById(Long id) {
+        Optional<Address> optionalAddress = addressRepository.findById(id);
+        return addressMapper.toDTO(optionalAddress.get());
+    }
 }

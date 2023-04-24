@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class ToolGroupService {
     private ToolGroupRepository toolGroupRepository;
@@ -22,16 +24,20 @@ public class ToolGroupService {
     }
 
     @PostMapping
-    public MessageResponseDTO create(ToolGroupDTO toolGroupDTO){
+    public MessageResponseDTO create(ToolGroupDTO toolGroupDTO) {
 
         ToolGroup toolGroupToSave = toolGroupMapper.toModel(toolGroupDTO);
 
         ToolGroup saveToolGroup = toolGroupRepository.save(toolGroupToSave);
         return MessageResponseDTO.builder()
-                .message("Grupo de Ferramentas " + saveToolGroup.getId()  + " criado com sucesso.")
+                .message("Grupo de Ferramentas " + saveToolGroup.getId() + " criado com sucesso.")
                 .build();
 
     }
 
 
+    public ToolGroupDTO findById(Long id) {
+        Optional<ToolGroup> optionalToolGroup = toolGroupRepository.findById(id);
+        return toolGroupMapper.toDTO(optionalToolGroup.get());
+    }
 }

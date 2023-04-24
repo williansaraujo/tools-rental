@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class ToolService {
     private ToolRepository toolRepository;
@@ -30,5 +32,10 @@ public class ToolService {
         return MessageResponseDTO.builder()
                 .message("Ferramenta " + saveTool.getId() + " adicionada com sucesso.")
                 .build();
+    }
+
+    public ToolDTO findById(Long id) {
+        Optional<Tool> optionalTool = toolRepository.findById(id);
+        return toolMapper.toDTO(optionalTool.get());
     }
 }

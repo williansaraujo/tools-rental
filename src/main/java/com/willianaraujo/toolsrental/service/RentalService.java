@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class RentalService {
     private RentalRepository rentalRepository;
@@ -30,5 +32,10 @@ public class RentalService {
         return MessageResponseDTO.builder()
                 .message("Aluguel " + saveRental.getId() + " realizado com sucesso.")
                 .build();
+    }
+
+    public RentalDTO findById(Long id) {
+        Optional<Rental> optionalRental = rentalRepository.findById(id);
+        return rentalMapper.toDTO(optionalRental.get());
     }
 }

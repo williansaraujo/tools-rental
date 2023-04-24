@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.Optional;
+
 @Service
 public class UserService {
     private UserRepository userRepository;
@@ -21,12 +23,17 @@ public class UserService {
     }
 
     @PostMapping
-    public MessageResponseDTO create(UserDTO userDTO){
-    User userToSave = userMapper.toModel(userDTO);
+    public MessageResponseDTO create(UserDTO userDTO) {
+        User userToSave = userMapper.toModel(userDTO);
 
-    User saveUser = userRepository.save(userToSave);
-    return MessageResponseDTO.builder()
-            .message("Usuário "+ saveUser.getId() + " criado com sucesso." )
-            .build();
-}
+        User saveUser = userRepository.save(userToSave);
+        return MessageResponseDTO.builder()
+                .message("Usuário " + saveUser.getId() + " criado com sucesso.")
+                .build();
+    }
+
+    public UserDTO findById(Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        return userMapper.toDTO(optionalUser.get());
+    }
 }

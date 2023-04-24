@@ -6,10 +6,7 @@ import com.willianaraujo.toolsrental.entity.ToolGroup;
 import com.willianaraujo.toolsrental.service.ToolGroupService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("api/v1/tools-group")
@@ -23,8 +20,13 @@ public class ToolsGroupController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody @Valid ToolGroupDTO toolGroupDTO){
+    public MessageResponseDTO create(@RequestBody @Valid ToolGroupDTO toolGroupDTO) {
         return toolGroupService.create(toolGroupDTO);
 
+    }
+
+    @GetMapping("{id}")
+    public ToolGroupDTO findById(@PathVariable Long id) {
+        return toolGroupService.findById(id);
     }
 }
