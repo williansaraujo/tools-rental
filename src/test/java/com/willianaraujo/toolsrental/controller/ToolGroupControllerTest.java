@@ -1,9 +1,11 @@
-package controller;
+package com.willianaraujo.toolsrental.controller;
 
-import com.willianaraujo.toolsrental.controller.RentalsController;
+
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
-import com.willianaraujo.toolsrental.dto.RentalDTO;
-import com.willianaraujo.toolsrental.service.RentalService;
+import com.willianaraujo.toolsrental.dto.ToolGroupDTO;
+
+import com.willianaraujo.toolsrental.entity.ToolGroup;
+import com.willianaraujo.toolsrental.service.ToolGroupService;
 import org.hamcrest.core.Is;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,54 +18,53 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import utils.RentalUtils;
+import com.willianaraujo.toolsrental.utils.ToolGroupUtils;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static utils.RentalUtils.asJsonString;
+import static com.willianaraujo.toolsrental.utils.ToolGroupUtils.asJsonString;
 
 @ExtendWith(MockitoExtension.class)
-public class RentalControllerTest {
+public class ToolGroupControllerTest {
+
+    String TOOL_GROUP_API_URL_PATH = "/api/v1/tools-group";
 
     private MockMvc mockMvc;
 
-    String RENTALS_API_URL_PATH = "/api/v1/rentals";
-
-    private RentalDTO rentalDTO;
+    private ToolGroup toolGroup;
 
     @Mock
-    private RentalService rentalService;
+    private ToolGroupService toolGroupService;
 
     @InjectMocks
-    private RentalsController rentalsController;
-
+    private ToolsGroupController toolsGroupController;
 
     @BeforeEach
     void setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(rentalsController)
+        mockMvc = MockMvcBuilders.standaloneSetup(toolsGroupController)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
                 .setViewResolvers((viewName, locale) -> new MappingJackson2JsonView())
                 .build();
     }
 
-
     @Test
-    void testRentalCreated() throws Exception {
-        RentalDTO rentalDTO = RentalUtils.createFakeRentalDTO();
+    void testUserCreated() throws Exception {
+        ToolGroupDTO toolGroupDTO = ToolGroupUtils.createFakeToolGroupDTO();
 
         MessageResponseDTO expectedMessageResponse = MessageResponseDTO.builder()
-                .message("Aluguel " + rentalDTO.getId() + " realizado com sucesso.")
+                .message("Grupo de Ferramentas " + toolGroupDTO.getId() + " criado com sucesso.")
                 .build();
 
-        when(rentalService.create(rentalDTO)).thenReturn(expectedMessageResponse);
+        when(toolGroupService.create(toolGroupDTO)).thenReturn(expectedMessageResponse);
 
-        mockMvc.perform(post(RENTALS_API_URL_PATH)
+        mockMvc.perform(post(TOOL_GROUP_API_URL_PATH)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(asJsonString(rentalDTO))
+                        .content(asJsonString(toolGroupDTO))
                 )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("message", Is.is(expectedMessageResponse.getMessage())));
     }
+
 }

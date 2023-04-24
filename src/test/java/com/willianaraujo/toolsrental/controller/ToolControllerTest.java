@@ -1,6 +1,5 @@
-package controller;
+package com.willianaraujo.toolsrental.controller;
 
-import com.willianaraujo.toolsrental.controller.ToolsController;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.ToolDTO;
 import com.willianaraujo.toolsrental.service.ToolService;
@@ -16,13 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import utils.ToolUtils;
+import com.willianaraujo.toolsrental.utils.ToolUtils;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static utils.ToolUtils.asJsonString;
+import static com.willianaraujo.toolsrental.utils.ToolUtils.asJsonString;
 
 @ExtendWith(MockitoExtension.class)
 public class ToolControllerTest {

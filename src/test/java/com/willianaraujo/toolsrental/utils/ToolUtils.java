@@ -1,4 +1,4 @@
-package utils;
+package com.willianaraujo.toolsrental.utils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -11,10 +11,10 @@ import com.willianaraujo.toolsrental.entity.Tool;
 import java.math.BigDecimal;
 import java.util.Calendar;
 
-import static utils.AddressUtils.createFakeAddress;
-import static utils.AddressUtils.createFakeAddressDTO;
-import static utils.ToolGroupUtils.createFakeToolGroup;
-import static utils.ToolGroupUtils.createFakeToolGroupDTO;
+import static com.willianaraujo.toolsrental.utils.AddressUtils.createFakeAddress;
+import static com.willianaraujo.toolsrental.utils.AddressUtils.createFakeAddressDTO;
+import static com.willianaraujo.toolsrental.utils.ToolGroupUtils.createFakeToolGroup;
+import static com.willianaraujo.toolsrental.utils.ToolGroupUtils.createFakeToolGroupDTO;
 
 public class ToolUtils {
 

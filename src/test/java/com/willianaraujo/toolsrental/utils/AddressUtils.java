@@ -1,4 +1,4 @@
-package utils;
+package com.willianaraujo.toolsrental.utils;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,9 +9,6 @@ import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.entity.Address;
 
 import java.util.Calendar;
-
-import static utils.UserUtils.createFakeUser;
-import static utils.UserUtils.createFakeUserDTO;
 
 public class AddressUtils {
 
@@ -28,7 +25,7 @@ public class AddressUtils {
                 .state(faker.address().state())
                 .zipCode(384121-334)
                 .country(faker.address().country())
-                .userId(createFakeUserDTO())
+                .userId(UserUtils.createFakeUserDTO())
                 .available(Boolean.valueOf("true"))
                 .createdAt(Calendar.getInstance().getTime())
                 .updatedAt(Calendar.getInstance().getTime())
@@ -43,9 +40,9 @@ public class AddressUtils {
                 .neighborhood("São Vicente")
                 .city(faker.address().city())
                 .state(faker.address().state())
-                .zipCode(Integer.valueOf(faker.address().zipCode()))
+                .zipCode(384121-334)
                 .country(faker.address().country())
-                .userId(createFakeUser())
+                .userId(UserUtils.createFakeUser())
                 .available(Boolean.valueOf("true"))
                 .createdAt(Calendar.getInstance().getTime())
                 .updatedAt(Calendar.getInstance().getTime())

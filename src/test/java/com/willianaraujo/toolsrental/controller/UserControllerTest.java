@@ -1,6 +1,5 @@
-package controller;
+package com.willianaraujo.toolsrental.controller;
 
-import com.willianaraujo.toolsrental.controller.UsersController;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.UserDTO;
 import com.willianaraujo.toolsrental.entity.User;
@@ -16,12 +15,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import utils.UserUtils;
+import com.willianaraujo.toolsrental.utils.UserUtils;
 import com.willianaraujo.toolsrental.service.UserService;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static utils.UserUtils.*;
+import static com.willianaraujo.toolsrental.utils.UserUtils.*;
 
 @ExtendWith(MockitoExtension.class)
 public class UserControllerTest {

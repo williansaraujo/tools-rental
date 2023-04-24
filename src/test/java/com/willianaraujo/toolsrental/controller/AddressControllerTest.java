@@ -1,6 +1,5 @@
-package controller;
+package com.willianaraujo.toolsrental.controller;
 
-import com.willianaraujo.toolsrental.controller.AddressesController;
 import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.service.AddressService;
@@ -16,13 +15,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
-import utils.AddressUtils;
+import com.willianaraujo.toolsrental.utils.AddressUtils;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static utils.AddressUtils.asJsonString;
+import static com.willianaraujo.toolsrental.utils.AddressUtils.asJsonString;
 
 @ExtendWith(MockitoExtension.class)
 public class AddressControllerTest {
