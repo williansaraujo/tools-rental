@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {
 
@@ -31,18 +33,18 @@ public class AddressServiceTest {
 
         AddressDTO addressDTO = addressService.findById(expectedFoundAddress.getId());
 
-        Assertions.assertEquals(expectedFoundAddress.getStreet(), addressDTO.getStreet());
-        Assertions.assertEquals(expectedFoundAddress.getNumber(), addressDTO.getNumber());
-        Assertions.assertEquals(expectedFoundAddress.getComplement(), addressDTO.getComplement());
-        Assertions.assertEquals(expectedFoundAddress.getNeighborhood(), addressDTO.getNeighborhood());
-        Assertions.assertEquals(expectedFoundAddress.getState(), addressDTO.getState());
-        Assertions.assertEquals(expectedFoundAddress.getCity(), addressDTO.getCity());
-        Assertions.assertEquals(expectedFoundAddress.getCountry(), addressDTO.getCountry());
-        Assertions.assertEquals(expectedFoundAddress.getZipCode(), addressDTO.getZipCode());
-        Assertions.assertEquals(expectedFoundAddress.getUserId().getId(), addressDTO.getUserId().getId());
-        Assertions.assertEquals(expectedFoundAddress.getUserId().getName(), addressDTO.getUserId().getName());
-        Assertions.assertEquals(expectedFoundAddress.getUserId().getEmail(), addressDTO.getUserId().getEmail());
-        Assertions.assertEquals(expectedFoundAddress.getUserId().getPhone(), addressDTO.getUserId().getPhone());
+        assertEquals(expectedFoundAddress.getStreet(), addressDTO.getStreet());
+        assertEquals(expectedFoundAddress.getNumber(), addressDTO.getNumber());
+        assertEquals(expectedFoundAddress.getComplement(), addressDTO.getComplement());
+        assertEquals(expectedFoundAddress.getNeighborhood(), addressDTO.getNeighborhood());
+        assertEquals(expectedFoundAddress.getState(), addressDTO.getState());
+        assertEquals(expectedFoundAddress.getCity(), addressDTO.getCity());
+        assertEquals(expectedFoundAddress.getCountry(), addressDTO.getCountry());
+        assertEquals(expectedFoundAddress.getZipCode(), addressDTO.getZipCode());
+        assertEquals(expectedFoundAddress.getUserId().getId(), addressDTO.getUserId().getId());
+        assertEquals(expectedFoundAddress.getUserId().getName(), addressDTO.getUserId().getName());
+        assertEquals(expectedFoundAddress.getUserId().getEmail(), addressDTO.getUserId().getEmail());
+        assertEquals(expectedFoundAddress.getUserId().getPhone(), addressDTO.getUserId().getPhone());
 
     }
 }

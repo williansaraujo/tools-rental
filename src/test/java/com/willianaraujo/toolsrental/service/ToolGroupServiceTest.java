@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class ToolGroupServiceTest {
 
@@ -32,7 +34,7 @@ public class ToolGroupServiceTest {
 
         ToolGroupDTO toolGroupDTO = toolGroupService.findById(expectedFoundToolGroup.getId());
 
-        Assertions.assertEquals(expectedFoundToolGroup.getName(), toolGroupDTO.getName());
+        assertEquals(expectedFoundToolGroup.getName(), toolGroupDTO.getName());
 
     }
 }

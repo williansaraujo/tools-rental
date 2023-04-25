@@ -14,6 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 @ExtendWith(MockitoExtension.class)
 public class ToolServiceTest {
     @Mock
@@ -30,24 +32,24 @@ public class ToolServiceTest {
 
         ToolDTO toolDTO = toolService.findById(expectedFoundTool.getId());
 
-        Assertions.assertEquals(expectedFoundTool.getName(), toolDTO.getName());
-        Assertions.assertEquals(expectedFoundTool.getDescription(), toolDTO.getDescription());
-        Assertions.assertEquals(expectedFoundTool.getRentalRatePerDay(), toolDTO.getRentalRatePerDay());
-        Assertions.assertEquals(expectedFoundTool.getPhotoFilePath(), toolDTO.getPhotoFilePath());
-        Assertions.assertEquals(expectedFoundTool.getToolGroupId().getId(), toolDTO.getToolGroupId().getId());
-        Assertions.assertEquals(expectedFoundTool.getToolGroupId().getName(), toolDTO.getToolGroupId().getName());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getId(), toolDTO.getOwnerAddressId().getUserId().getId());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getName(), toolDTO.getOwnerAddressId().getUserId().getName());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getEmail(), toolDTO.getOwnerAddressId().getUserId().getEmail());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getPhone(), toolDTO.getOwnerAddressId().getUserId().getPhone());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getStreet(), toolDTO.getOwnerAddressId().getStreet());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getNumber(), toolDTO.getOwnerAddressId().getNumber());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getComplement(), toolDTO.getOwnerAddressId().getComplement());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getNeighborhood(), toolDTO.getOwnerAddressId().getNeighborhood());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getCity(), toolDTO.getOwnerAddressId().getCity());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getState(), toolDTO.getOwnerAddressId().getState());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getCountry(), toolDTO.getOwnerAddressId().getCountry());
-        Assertions.assertEquals(expectedFoundTool.getOwnerAddressId().getZipCode(), toolDTO.getOwnerAddressId().getZipCode());
+        assertEquals(expectedFoundTool.getName(), toolDTO.getName());
+        assertEquals(expectedFoundTool.getDescription(), toolDTO.getDescription());
+        assertEquals(expectedFoundTool.getRentalRatePerDay(), toolDTO.getRentalRatePerDay());
+        assertEquals(expectedFoundTool.getPhotoFilePath(), toolDTO.getPhotoFilePath());
+        assertEquals(expectedFoundTool.getToolGroupId().getId(), toolDTO.getToolGroupId().getId());
+        assertEquals(expectedFoundTool.getToolGroupId().getName(), toolDTO.getToolGroupId().getName());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getId(), toolDTO.getOwnerAddressId().getUserId().getId());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getName(), toolDTO.getOwnerAddressId().getUserId().getName());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getEmail(), toolDTO.getOwnerAddressId().getUserId().getEmail());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getUserId().getPhone(), toolDTO.getOwnerAddressId().getUserId().getPhone());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getStreet(), toolDTO.getOwnerAddressId().getStreet());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getNumber(), toolDTO.getOwnerAddressId().getNumber());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getComplement(), toolDTO.getOwnerAddressId().getComplement());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getNeighborhood(), toolDTO.getOwnerAddressId().getNeighborhood());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getCity(), toolDTO.getOwnerAddressId().getCity());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getState(), toolDTO.getOwnerAddressId().getState());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getCountry(), toolDTO.getOwnerAddressId().getCountry());
+        assertEquals(expectedFoundTool.getOwnerAddressId().getZipCode(), toolDTO.getOwnerAddressId().getZipCode());
 
     }
 }
