@@ -39,6 +39,10 @@ public class AddressServiceTest {
         Assertions.assertEquals(expectedFoundAddress.getCity(), addressDTO.getCity());
         Assertions.assertEquals(expectedFoundAddress.getCountry(), addressDTO.getCountry());
         Assertions.assertEquals(expectedFoundAddress.getZipCode(), addressDTO.getZipCode());
+        Assertions.assertEquals(expectedFoundAddress.getUserId().getId(), addressDTO.getUserId().getId());
+        Assertions.assertEquals(expectedFoundAddress.getUserId().getName(), addressDTO.getUserId().getName());
+        Assertions.assertEquals(expectedFoundAddress.getUserId().getEmail(), addressDTO.getUserId().getEmail());
+        Assertions.assertEquals(expectedFoundAddress.getUserId().getPhone(), addressDTO.getUserId().getPhone());
 
     }
 }
