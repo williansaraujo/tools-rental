@@ -2,6 +2,7 @@ package com.willianaraujo.toolsrental.service;
 
 import com.willianaraujo.toolsrental.dto.ToolDTO;
 import com.willianaraujo.toolsrental.entity.Tool;
+import com.willianaraujo.toolsrental.exception.ToolNotFoundException;
 import com.willianaraujo.toolsrental.repository.ToolRepository;
 import com.willianaraujo.toolsrental.utils.ToolUtils;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class ToolServiceTest {
@@ -25,7 +28,7 @@ public class ToolServiceTest {
     private ToolService toolService;
 
     @Test
-    void testGetTool() {
+    void testGetTool() throws ToolNotFoundException {
         Tool expectedFoundTool = ToolUtils.createFakeTool();
 
         Mockito.when(toolRepository.findById(expectedFoundTool.getId())).thenReturn(Optional.of(expectedFoundTool));
@@ -50,6 +53,17 @@ public class ToolServiceTest {
         assertEquals(expectedFoundTool.getOwnerAddressId().getState(), toolDTO.getOwnerAddressId().getState());
         assertEquals(expectedFoundTool.getOwnerAddressId().getCountry(), toolDTO.getOwnerAddressId().getCountry());
         assertEquals(expectedFoundTool.getOwnerAddressId().getZipCode(), toolDTO.getOwnerAddressId().getZipCode());
+
+    }
+
+    @Test
+    void testGetToolNotFound() {
+        var invalidId = 10L;
+
+        when(toolRepository.findById(invalidId))
+                .thenReturn(Optional.ofNullable(any(Tool.class)));
+
+        assertThrows(ToolNotFoundException.class, () -> toolService.findById(invalidId));
 
     }
 }

@@ -2,6 +2,7 @@ package com.willianaraujo.toolsrental.service;
 
 import com.willianaraujo.toolsrental.dto.UserDTO;
 import com.willianaraujo.toolsrental.entity.User;
+import com.willianaraujo.toolsrental.exception.UserNotFoundException;
 import com.willianaraujo.toolsrental.repository.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -25,7 +26,7 @@ public class UserServiceTest {
     private UserService userService;
 
     @Test
-    void testGetUser() {
+    void testGetUser() throws UserNotFoundException {
         User expectedFoundUser = createFakeUser();
 
         when(userRepository.findById(expectedFoundUser.getId())).thenReturn(Optional.of(expectedFoundUser));
@@ -36,5 +37,15 @@ public class UserServiceTest {
         assertEquals(expectedFoundUser.getPhone(), userDTO.getPhone());
         assertEquals(expectedFoundUser.getEmail(), userDTO.getEmail());
 
+    }
+
+    @Test
+    void testGetUserNotFound() {
+        var invalidId = 10L;
+
+        when(userRepository.findById(invalidId))
+                .thenReturn(Optional.ofNullable(any(User.class)));
+
+        assertThrows(UserNotFoundException.class, () -> userService.findById(invalidId));
     }
 }

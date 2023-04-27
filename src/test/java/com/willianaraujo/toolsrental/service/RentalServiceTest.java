@@ -2,9 +2,10 @@ package com.willianaraujo.toolsrental.service;
 
 import com.willianaraujo.toolsrental.dto.RentalDTO;
 import com.willianaraujo.toolsrental.entity.Rental;
+import com.willianaraujo.toolsrental.exception.RentalNotFoundException;
+import com.willianaraujo.toolsrental.exception.ToolNotFoundException;
 import com.willianaraujo.toolsrental.repository.RentalRepository;
 import com.willianaraujo.toolsrental.utils.RentalUtils;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -14,7 +15,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class RentalServiceTest {
@@ -26,7 +30,7 @@ public class RentalServiceTest {
     private RentalService rentalService;
 
     @Test
-    void getTestRental() {
+    void testGetRental() throws RentalNotFoundException {
         Rental expectedFoundRental = RentalUtils.createFakeRental();
 
         Mockito.when(rentalRepository.findById(expectedFoundRental.getId())).thenReturn(Optional.of(expectedFoundRental));
@@ -58,5 +62,16 @@ public class RentalServiceTest {
         assertEquals(expectedFoundRental.getToolId().getToolGroupId().getName(), rentalDTO.getToolId().getToolGroupId().getName());
 
 
+    }
+
+
+    @Test
+    void testGetRentalNotFound() {
+        var invalidId = 10L;
+
+        when(rentalRepository.findById(invalidId))
+                .thenReturn(Optional.ofNullable(any(Rental.class)));
+
+        assertThrows(RentalNotFoundException.class, () -> rentalService.findById(invalidId));
     }
 }

@@ -2,6 +2,9 @@ package com.willianaraujo.toolsrental.service;
 
 import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.entity.Address;
+import com.willianaraujo.toolsrental.entity.Rental;
+import com.willianaraujo.toolsrental.exception.AddressNotFoundException;
+import com.willianaraujo.toolsrental.exception.ToolNotFoundException;
 import com.willianaraujo.toolsrental.repository.AddressRepository;
 import com.willianaraujo.toolsrental.utils.AddressUtils;
 import org.junit.jupiter.api.Assertions;
@@ -15,6 +18,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class AddressServiceTest {
@@ -26,7 +31,7 @@ public class AddressServiceTest {
     private AddressService addressService;
 
     @Test
-    void testGetAddress() {
+    void testGetAddress() throws AddressNotFoundException {
         Address expectedFoundAddress = AddressUtils.createFakeAddress();
 
         Mockito.when(addressRepository.findById(expectedFoundAddress.getId())).thenReturn(Optional.of(expectedFoundAddress));
@@ -45,6 +50,17 @@ public class AddressServiceTest {
         assertEquals(expectedFoundAddress.getUserId().getName(), addressDTO.getUserId().getName());
         assertEquals(expectedFoundAddress.getUserId().getEmail(), addressDTO.getUserId().getEmail());
         assertEquals(expectedFoundAddress.getUserId().getPhone(), addressDTO.getUserId().getPhone());
+
+    }
+
+    @Test
+    void testGetAddressNotFound() {
+        var invalidId = 10L;
+
+        when(addressRepository.findById(invalidId))
+                .thenReturn(Optional.ofNullable(any(Address.class)));
+
+        assertThrows(AddressNotFoundException.class, () -> addressService.findById(invalidId));
 
     }
 }
