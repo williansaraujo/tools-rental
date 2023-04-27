@@ -2,6 +2,7 @@ package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.UserDTO;
+import com.willianaraujo.toolsrental.exception.UserNotFoundException;
 import com.willianaraujo.toolsrental.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    public UserDTO findById(@PathVariable Long id) {
+    public UserDTO findById(@PathVariable Long id) throws UserNotFoundException {
         return userService.findById(id);
     }
 

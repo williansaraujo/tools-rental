@@ -3,6 +3,8 @@ package com.willianaraujo.toolsrental.service;
 import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.entity.Address;
+import com.willianaraujo.toolsrental.entity.User;
+import com.willianaraujo.toolsrental.exception.AddressNotFoundException;
 import com.willianaraujo.toolsrental.mapper.AddressMapper;
 import com.willianaraujo.toolsrental.repository.AddressRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +36,9 @@ public class AddressService {
                 .build();
     }
 
-    public AddressDTO findById(Long id) {
-        Optional<Address> optionalAddress = addressRepository.findById(id);
-        return addressMapper.toDTO(optionalAddress.get());
+    public AddressDTO findById(Long id) throws AddressNotFoundException {
+        Address address = addressRepository.findById(id)
+                .orElseThrow(() -> new AddressNotFoundException(id));
+        return addressMapper.toDTO(address);
     }
 }

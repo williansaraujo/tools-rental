@@ -3,6 +3,7 @@ package com.willianaraujo.toolsrental.service;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.ToolDTO;
 import com.willianaraujo.toolsrental.entity.Tool;
+import com.willianaraujo.toolsrental.exception.ToolNotFoundException;
 import com.willianaraujo.toolsrental.mapper.ToolGroupMapper;
 import com.willianaraujo.toolsrental.mapper.ToolMapper;
 import com.willianaraujo.toolsrental.repository.ToolRepository;
@@ -34,8 +35,9 @@ public class ToolService {
                 .build();
     }
 
-    public ToolDTO findById(Long id) {
-        Optional<Tool> optionalTool = toolRepository.findById(id);
-        return toolMapper.toDTO(optionalTool.get());
+    public ToolDTO findById(Long id) throws ToolNotFoundException {
+        Tool tool = toolRepository.findById(id)
+                .orElseThrow(() -> new ToolNotFoundException(id));
+        return toolMapper.toDTO(tool);
     }
 }

@@ -2,6 +2,7 @@ package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.AddressDTO;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
+import com.willianaraujo.toolsrental.exception.AddressNotFoundException;
 import com.willianaraujo.toolsrental.service.AddressService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class AddressesController {
     }
 
     @GetMapping("{id}")
-    public AddressDTO findById(@PathVariable Long id) {
+    public AddressDTO findById(@PathVariable Long id) throws AddressNotFoundException {
         return addressService.findById(id);
     }
 

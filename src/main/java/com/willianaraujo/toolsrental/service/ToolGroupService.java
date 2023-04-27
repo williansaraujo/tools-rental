@@ -3,6 +3,7 @@ package com.willianaraujo.toolsrental.service;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.ToolGroupDTO;
 import com.willianaraujo.toolsrental.entity.ToolGroup;
+import com.willianaraujo.toolsrental.exception.ToolGroupNotFoundException;
 import com.willianaraujo.toolsrental.mapper.ToolGroupMapper;
 import com.willianaraujo.toolsrental.repository.ToolGroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,8 +37,9 @@ public class ToolGroupService {
     }
 
 
-    public ToolGroupDTO findById(Long id) {
-        Optional<ToolGroup> optionalToolGroup = toolGroupRepository.findById(id);
-        return toolGroupMapper.toDTO(optionalToolGroup.get());
+    public ToolGroupDTO findById(Long id) throws ToolGroupNotFoundException {
+        ToolGroup toolGroup = toolGroupRepository.findById(id)
+                .orElseThrow(() -> new ToolGroupNotFoundException(id));
+        return toolGroupMapper.toDTO(toolGroup);
     }
 }

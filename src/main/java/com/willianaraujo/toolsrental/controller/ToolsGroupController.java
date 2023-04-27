@@ -3,6 +3,7 @@ package com.willianaraujo.toolsrental.controller;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.ToolGroupDTO;
 import com.willianaraujo.toolsrental.entity.ToolGroup;
+import com.willianaraujo.toolsrental.exception.ToolGroupNotFoundException;
 import com.willianaraujo.toolsrental.service.ToolGroupService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class ToolsGroupController {
     }
 
     @GetMapping("{id}")
-    public ToolGroupDTO findById(@PathVariable Long id) {
+    public ToolGroupDTO findById(@PathVariable Long id) throws ToolGroupNotFoundException {
         return toolGroupService.findById(id);
     }
 }

@@ -2,6 +2,7 @@ package com.willianaraujo.toolsrental.controller;
 
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.ToolDTO;
+import com.willianaraujo.toolsrental.exception.ToolNotFoundException;
 import com.willianaraujo.toolsrental.service.ToolService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,12 +19,12 @@ public class ToolsController {
     }
 
     @PostMapping
-    public MessageResponseDTO create(@RequestBody @Valid ToolDTO toolDTO){
+    public MessageResponseDTO create(@RequestBody @Valid ToolDTO toolDTO) {
         return toolService.create(toolDTO);
     }
 
     @GetMapping("/{id}")
-    public ToolDTO findById(@PathVariable Long id){
+    public ToolDTO findById(@PathVariable Long id) throws ToolNotFoundException {
         return toolService.findById(id);
     }
 }

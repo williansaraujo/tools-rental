@@ -3,6 +3,7 @@ package com.willianaraujo.toolsrental.service;
 import com.willianaraujo.toolsrental.dto.MessageResponseDTO;
 import com.willianaraujo.toolsrental.dto.RentalDTO;
 import com.willianaraujo.toolsrental.entity.Rental;
+import com.willianaraujo.toolsrental.exception.RentalNotFoundException;
 import com.willianaraujo.toolsrental.mapper.RentalMapper;
 import com.willianaraujo.toolsrental.repository.RentalRepository;
 import jakarta.validation.Valid;
@@ -24,7 +25,7 @@ public class RentalService {
     }
 
     @PostMapping
-    public MessageResponseDTO create(RentalDTO rentalDTO){
+    public MessageResponseDTO create(RentalDTO rentalDTO) {
 
         Rental rentalToSave = rentalMapper.toModel(rentalDTO);
 
@@ -34,8 +35,9 @@ public class RentalService {
                 .build();
     }
 
-    public RentalDTO findById(Long id) {
-        Optional<Rental> optionalRental = rentalRepository.findById(id);
-        return rentalMapper.toDTO(optionalRental.get());
+    public RentalDTO findById(Long id) throws RentalNotFoundException {
+        Rental rental = rentalRepository.findById(id)
+                .orElseThrow(() -> new RentalNotFoundException(id));
+        return rentalMapper.toDTO(rental);
     }
 }
